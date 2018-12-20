@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <style>
+        .texareastyle {
+    width: 100%;
+    height: 10vh;
+    line-height: 1.5em;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: none;
+    background-size: auto 1.5em;
+    background-position: 0 0;
+    background-image: -webkit-linear-gradient(gray 1.15px, transparent 1px);
+    background-image: -o-linear-gradient(gray 1.15px, transparent 1px);
+    background-image: linear-gradient(gray 1.15px, transparent 1px);
+}
+.imgSize{
+    width: 150px;
+    height: 150px;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Товары</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="addProd">Добавить</a>
+            </li>
+
+        </ul>
+
+        <h1>Добавить товар</h1>
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <div class="card card-body">
+                <form id="formId"  method="post" enctype="multipart/form-data">
+                    <div class="row align-items-center">
+                        
+                                
+                                <div class="col-md-12">
+                                    <input name="image" id="inputFile" type="file">
+                                    <div class="form-group">
+                                        <label for="">Название</label>
+                                        <input name="name" type="input" class="form-control" id="inputName" aria-describedby="" placeholder="Введите название">
+        
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Стоимость</label>
+                                        <input name="cost" type="input" class="form-control" id="inputCost" aria-describedby="" placeholder="Введите стоимость">
+        
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Описание</label>
+        
+                                        <textarea name="description" placeholder="Введите описание" class="texareastyle" rows="3" id="textareaDescription"></textarea>
+        
+                                    </div>
+        
+                                </div>
+                            </div>
+                        
+                        
+                    
+                    <div class="row justify-content-end">
+                        <div class="col-md-2">
+                            <button id="btnSubmit" type="submit"  class="btn btn-primary">Добавить товар</button>
+                        </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+    <script>
+        $('#formId').on('submit', function(e){
+            e.preventDefault()
+            var formData = new FormData(this)
+
+            $.ajax({
+                type: 'POST',
+                url: '/addProd',
+                data:formData,
+                processData:false,
+                contentType:false,
+                success: function(r){
+                    alert('Успешно добавлено!')
+                },
+                error: function(er){
+                    console.log(er);
+                    alert('Упс, что то пошло не так')
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
